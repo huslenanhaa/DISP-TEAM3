@@ -1,84 +1,83 @@
-# ProBuild Camunda 8 Process Automation
-
-## DISP Team 3 - 2026 Submission
-
-This project is a Camunda 8 process automation solution for the ProBuild case study. It demonstrates how a business process can be modelled using BPMN and automated using Camunda 8, Camunda Forms, and Java-based external workers.
-
-The solution covers ProBuild’s operational process, including customer tool hire, retail ordering, stock checking, payment handling, finance application processing, FixPro repair handling, and reporting.
-
----
+# DISP Team 3 2026 - ProBuild Camunda 8 Portfolio Submission
 
 ## Project Overview
 
-The project contains:
+This repository contains the DISP Team 3 portfolio submission for the ProBuild case study.
 
-- An executable Camunda 8 BPMN model
-- Camunda Forms for human user tasks
-- A Spring Boot Java application
-- External workers implemented using Camunda `@JobWorker`
-- SaaS connection configuration for Camunda 8
-- Supporting resources for deployment and testing
+The project models and automates the ProBuild operational process using:
 
-Camunda 8 is used as the process automation engine. The Java application connects to Camunda and handles service tasks when they are created by the running process instance.
-
----
-
-## Technologies Used
-
-- Java
-- Spring Boot
-- Maven
-- Camunda 8
-- Zeebe
-- Camunda Web Modeler
-- Camunda Tasklist
-- Camunda Operate
+- i* socio-technical modelling
+- Strategic BPMN
+- Operational BPMN
+- Camunda 8 SaaS
 - Camunda Forms
-- BPMN 2.0
+- Java Spring Boot external workers
+- Maven
+- GitHub version control
+
+The automation is designed to run in Camunda 8. The BPMN process is deployed to Camunda Web Modeler, while the Java worker project runs locally and connects to Camunda through the Camunda API.
 
 ---
 
-## Project Structure
+## Repository Structure
 
 ```text
-ProBuild-Camunda8-Run/
+DISP TEAM3/
 │
-├── pom.xml
 ├── README.md
+├── repository-link.txt
 │
-├── src/
-│   └── main/
-│       ├── java/
-│       │   └── com/probuild/automation/
-│       │       ├── ProBuildApplication.java
-│       │       ├── CamundaDeploymentRunner.java
-│       │       └── workers/
-│       │           ├── FinanceWorkers.java
-│       │           ├── FixProWorkers.java
-│       │           ├── InventoryWorkers.java
-│       │           ├── ReportingWorkers.java
-│       │           ├── RetailSalesWorkers.java
-│       │           ├── ToolHireWorkers.java
-│       │           └── WorkerSupport.java
-│       │
-│       └── resources/
-│           ├── application.yml
-│           ├── probuild-operational-model.bpmn
-│           └── forms/
-│               ├── approve-repair-request.form
-│               ├── check-tool-availability.form
-│               ├── finance-application.form
-│               ├── fixpro-service-report.form
-│               ├── payment.form
-│               ├── place-retail-order.form
-│               └── submit-hire-request.form
+├── Camunda-Upload-Resources/
+│   ├── probuild-operational-model.bpmn
+│   └── forms/
+│       ├── approve-repair-request.form
+│       ├── check-tool-availability.form
+│       ├── finance-application.form
+│       ├── fixpro-service-report.form
+│       ├── payment.form
+│       ├── place-retail-order.form
+│       └── submit-hire-request.form
 │
-└── Camunda-Upload-ProBuild/
-    ├── probuild-operational-model.bpmn
-    ├── approve-repair-request.form
-    ├── check-tool-availability.form
-    ├── finance-application.form
-    ├── fixpro-service-report.form
-    ├── payment.form
-    ├── place-retail-order.form
-    └── submit-hire-request.form
+├── Java-Worker-Project/
+│   ├── pom.xml
+│   ├── README.md
+│   └── src/
+│       └── main/
+│           ├── java/com/probuild/automation/
+│           │   ├── ProBuildApplication.java
+│           │   ├── CamundaDeploymentRunner.java
+│           │   └── workers/
+│           │       ├── FinanceWorkers.java
+│           │       ├── FixProWorkers.java
+│           │       ├── InventoryWorkers.java
+│           │       ├── ReportingWorkers.java
+│           │       ├── RetailSalesWorkers.java
+│           │       ├── ToolHireWorkers.java
+│           │       └── WorkerSupport.java
+│           │
+│           └── resources/
+│               ├── application.yml
+│               ├── probuild-operational-model.bpmn
+│               └── forms/
+│                   ├── approve-repair-request.form
+│                   ├── check-tool-availability.form
+│                   ├── finance-application.form
+│                   ├── fixpro-service-report.form
+│                   ├── payment.form
+│                   ├── place-retail-order.form
+│                   └── submit-hire-request.form
+│
+├── Operational-BPMN/
+│   ├── ProBuild_Operational_BPMN.bpmn
+│   └── ProBuild_Operational_BPMN.png
+│
+├── Strategic-BPMN/
+│   ├── ProBuild_Strategic_BPMN.bpmn
+│   └── ProBuild_Strategic_BPMN.png
+│
+├── pistar/
+│   ├── goalModel.txt
+│   └── istar.png
+│
+└── Evidence/
+    └── Team 3 test case.docx
