@@ -1,0 +1,48 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "8.8.0"
+  },
+  "schemaVersion": 19,
+  "id": "submit-hire-request",
+  "components": [
+    {
+      "type": "textfield",
+      "label": "Customer name",
+      "key": "customerName",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "type": "textfield",
+      "label": "Tool ID",
+      "key": "toolId",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "type": "datetime",
+      "subtype": "date",
+      "label": "Hire start date",
+      "key": "hireStartDate",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "type": "number",
+      "label": "Hire length in days",
+      "key": "hireDays",
+      "validate": {
+        "required": true,
+        "min": 1,
+        "max": 30
+      }
+    }
+  ],
+  "type": "default"
+}

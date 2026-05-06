@@ -1,0 +1,54 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "8.8.0"
+  },
+  "schemaVersion": 19,
+  "id": "place-retail-order",
+  "components": [
+    {
+      "type": "textfield",
+      "label": "Customer name",
+      "key": "customerName",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "type": "textfield",
+      "label": "Product code",
+      "key": "productCode",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "type": "number",
+      "label": "Quantity",
+      "key": "quantity",
+      "defaultValue": 1,
+      "validate": {
+        "required": true,
+        "min": 1
+      }
+    },
+    {
+      "type": "number",
+      "label": "Order total",
+      "key": "orderTotal",
+      "validate": {
+        "required": true,
+        "min": 0.01
+      }
+    },
+    {
+      "type": "checkbox",
+      "label": "Trade Card customer",
+      "key": "tradeCard",
+      "defaultValue": false
+    }
+  ],
+  "type": "default"
+}

@@ -1,0 +1,22 @@
+server:
+  port: 8080
+
+camunda:
+  client:
+    mode: saas
+    auth:
+      client-id: ${ZEEBE_CLIENT_ID:YBDGCpPil9OlqCdncwax.DeUmNylqAi0}
+      client-secret: ${ZEEBE_CLIENT_SECRET:kZsDMPLQf5t9NdfOMzo9zqv~tdOg0CGTZA8773ii.ks9in2Thn7BFBvegsH-rErm}
+    cloud:
+      cluster-id: ${ZEEBE_CLUSTER_ID:848240b1-573c-4a07-bd52-723bea5b23b7}
+      region: ${ZEEBE_REGION:lhr-1}
+
+probuild:
+  deployment:
+    enabled: false
+  demo:
+    payment-failure: false
+    finance-decision: approved
+    tool-available: true
+    stock-available: true
+    repair-approved: true

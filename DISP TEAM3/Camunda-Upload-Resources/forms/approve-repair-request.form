@@ -1,0 +1,36 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.8.0",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "8.8.0"
+  },
+  "schemaVersion": 19,
+  "id": "approve-repair-request",
+  "components": [
+    {
+      "type": "textfield",
+      "label": "Tool ID",
+      "key": "toolId",
+      "validate": {
+        "required": true
+      }
+    },
+    {
+      "type": "number",
+      "label": "Estimated repair cost",
+      "key": "repairCost",
+      "validate": {
+        "required": true,
+        "min": 0
+      }
+    },
+    {
+      "type": "checkbox",
+      "label": "Approve repair",
+      "key": "repairApproved",
+      "defaultValue": true
+    }
+  ],
+  "type": "default"
+}
