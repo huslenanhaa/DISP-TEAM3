@@ -1,112 +1,93 @@
-# DISP Team 3 2026 - ProBuild Process Modelling and Automation
+# ProBuild Process Modelling and Automation
 
-## Project Summary
+**DISP Team 3 2026 | University of the West of England**
 
-This repository contains the DISP Team 3 portfolio submission for the ProBuild Supplies Ltd case study.
+This repository contains the portfolio submission for the ProBuild Supplies Ltd case study. The project models ProBuild as a socio-technical system and then develops the process into strategic BPMN, operational BPMN, Camunda Forms, and Camunda 8 automation.
 
-The project models ProBuild as a socio-technical system and then develops the business process through strategic BPMN, operational BPMN, Camunda Forms, and Camunda 8 automation. The implemented solution demonstrates how ProBuild’s retail sales, tool hire, finance, warehouse, supplier, and repair workflows can be coordinated through a process automation engine.
-
-The automation uses Camunda 8 SaaS for process execution and monitoring, with a Java Spring Boot worker application connecting to Camunda through the Camunda API. Camunda Forms are used to capture user input, and Java workers automate service tasks such as stock checks, payment handling, finance decisions, warehouse updates, and FixPro repair interactions.
+The final automation uses **Camunda 8 SaaS** with a **Java Spring Boot external worker application**. Camunda Forms capture user input, BPMN service tasks create Zeebe jobs, and Java workers complete those jobs through matching `@JobWorker` methods.
 
 ---
 
-## Technologies Used
+## Project Scope
 
-- Camunda 8 SaaS
-- Camunda Web Modeler
-- Camunda Forms
-- Camunda Operate
-- Java 17
-- Spring Boot
-- Camunda Spring Boot Starter
-- Maven
-- BPMN 2.0
-- i* socio-technical modelling
-- GitHub for configuration management
+The project covers the following ProBuild business areas:
+
+| Area | Included Process Work |
+|---|---|
+| Retail sales | Customer order, stock check, payment and order confirmation |
+| Tool hire | Hire request, tool availability, deposit/payment and return flow |
+| Warehouse | Stock updates, order fulfilment, IMS synchronisation |
+| Finance | Credit checks, finance approval, repayment handling |
+| FixPro repairs | Tool maintenance, repair reports and approval handling |
+| Suppliers | Delivery and stock replenishment support |
 
 ---
 
-## Repository Structure
+## Portfolio Evidence
+
+| Marking Area | Repository Evidence |
+|---|---|
+| Socio-technical model | `Socio-Technical-Model` |
+| Strategic BPMN | `Strategic-BPMN` |
+| Operational BPMN | `Operational-BPMN` |
+| Camunda deployment resources | `Camunda-Upload-Resources` |
+| Camunda Forms | `Camunda-Upload-Resources/forms` |
+| Java automation workers | `Java-Worker-Project` |
+| Testing evidence | `Evidence` |
+| Configuration management | GitHub repository, commits and README |
+
+---
+
+## Main Folders
+
+### `Socio-Technical-Model`
+
+Contains the i* socio-technical model, including the visual model and source text file.
+
+### `Strategic-BPMN`
+
+Contains the high-level strategic BPMN model showing the business process before technical automation detail.
+
+### `Operational-BPMN`
+
+Contains the detailed operational BPMN model used for automation, including service tasks, user tasks, gateways, pools and message flows.
+
+### `Camunda-Upload-Resources`
+
+Contains the BPMN and Camunda Forms that can be uploaded to Camunda Web Modeler.
+
+### `Java-Worker-Project`
+
+Contains the Spring Boot application that connects to Camunda 8 and executes external workers using `@JobWorker`.
+
+### `Evidence`
+
+Contains the testing evidence, including test strategy, test cases, expected results, actual results and defects identified.
+
+---
+
+## Automation Design
+
+The operational process follows this automation flow:
 
 ```text
-DISP TEAM3/
-│
-├── README.md
-│
-├── Socio-Technical-Model/
-│   ├── ProBuild_iStar_SocioTechnical_Model.docx
-│   └── goalModel.txt
-│
-├── Strategic-BPMN/
-│   ├── ProBuild_Strategic_BPMN.bpmn
-│   └── ProBuild_Strategic_BPMN.png
-│
-├── Operational-BPMN/
-│   ├── ProBuild_Operational_BPMN.bpmn
-│   └── ProBuild_Operational_BPMN.png
-│
-├── Camunda-Upload-Resources/
-│   ├── probuild-operational-model.bpmn
-│   └── forms/
-│       ├── approve-repair-request.form
-│       ├── check-tool-availability.form
-│       ├── finance-application.form
-│       ├── fixpro-service-report.form
-│       ├── payment.form
-│       ├── place-retail-order.form
-│       └── submit-hire-request.form
-│
-├── Java-Worker-Project/
-│   ├── pom.xml
-│   ├── README.md
-│   └── src/
-│       └── main/
-│           ├── java/com/probuild/automation/
-│           │   ├── ProBuildApplication.java
-│           │   ├── CamundaDeploymentRunner.java
-│           │   ├── demo/
-│           │   │   └── ImportantAutomationSnippets.java
-│           │   └── workers/
-│           │       ├── FinanceWorkers.java
-│           │       ├── FixProWorkers.java
-│           │       ├── FinTrustWorkers.java
-│           │       ├── RetailSalesWorkers.java
-│           │       ├── ToolHireWorkers.java
-│           │       └── WarehouseImsWorkers.java
-│           │
-│           └── resources/
-│               ├── application.yml
-│               ├── probuild-operational-model.bpmn
-│               └── forms/
-│
-└── Evidence/
-    ├── ProBuild_Camunda8_Testing_Evidence_22025274.docx
-    └── ProBuild_Camunda8_Test_Case_Table_22025274.docx
-Portfolio Coverage
-Marking Area	Evidence in Repository
-Socio-technical model	Socio-Technical-Model/
-Strategic BPMN	Strategic-BPMN/
-Operational BPMN	Operational-BPMN/ and Camunda-Upload-Resources/
-Forms	Camunda-Upload-Resources/forms/
-Automation	Java-Worker-Project/
-Testing	Evidence/
-Configuration management	GitHub repository, commits, README and organised folder structure
-Camunda 8 Automation Overview
-The operational BPMN model is designed for Camunda 8. User tasks are supported by Camunda Forms, while service tasks are automated using Java external workers.
-
-The key automation pattern is:
-
-Camunda BPMN Service Task
-        ↓
+Camunda Form
+    ↓
+BPMN User Task
+    ↓
+Process Variables
+    ↓
+BPMN Service Task
+    ↓
 Zeebe Job Type
-        ↓
-Java Spring Boot @JobWorker
-        ↓
-Business Logic / Service Simulation
-        ↓
+    ↓
+Java @JobWorker
+    ↓
 Variables returned to Camunda
-        ↓
-Process continues through gateways and events
+    ↓
+Gateway / Next Process Step
+Service tasks in the BPMN are connected to Java workers by matching the BPMN job type with the Java @JobWorker annotation.
+
 Example:
 
 @JobWorker(type = "run-real-time-credit-check-on-customer")
@@ -122,39 +103,27 @@ public Map<String, Object> runCreditCheck(final ActivatedJob job) {
         "correlationId", variables.get("correlationId")
     );
 }
-This shows how a BPMN service task is connected to Java code using a matching Zeebe job type.
-
-How to Run the Java Worker Project
-Open a terminal.
-
-Navigate to the worker project:
+Running the Java Worker
+Open a terminal and navigate to the worker project:
 
 cd Java-Worker-Project
-Check that application.yml contains valid Camunda 8 SaaS client credentials:
-camunda:
-  client:
-    mode: saas
-    auth:
-      client-id: YOUR_CLIENT_ID
-      client-secret: YOUR_CLIENT_SECRET
-    cloud:
-      cluster-id: YOUR_CLUSTER_ID
-      region: YOUR_REGION
-Run the Spring Boot worker application:
-mvn spring-boot:run
-Keep the terminal running while testing the process in Camunda.
-How to Deploy the BPMN and Forms
-Open Camunda Web Modeler.
-Upload the BPMN file from:
-Camunda-Upload-Resources/probuild-operational-model.bpmn
-Upload all forms from:
-Camunda-Upload-Resources/forms/
-Deploy the BPMN and forms to the Camunda 8 cluster.
-Start a new process instance.
-Monitor the process in Camunda Operate.
-Example Test Variables
-These variables can be used when starting a test process instance:
+Run the Spring Boot application:
 
+mvn spring-boot:run
+The worker application must remain running while process instances are tested in Camunda.
+
+Deploying to Camunda 8
+Upload the following BPMN file to Camunda Web Modeler:
+
+Camunda-Upload-Resources/probuild-operational-model.bpmn
+
+Upload the forms from:
+
+Camunda-Upload-Resources/forms
+
+Deploy the BPMN and forms to the Camunda 8 cluster, then start a new process instance and monitor it in Camunda Operate.
+
+Example Test Variables
 {
   "correlationId": "test-001",
   "toolAvailable": true,
@@ -176,16 +145,17 @@ These variables can be used when starting a test process instance:
   "passed": true,
   "failed": false
 }
-Testing Evidence
-Testing evidence is stored in the Evidence/ folder.
+Testing
+Testing evidence is stored in the Evidence folder.
 
-The testing documentation includes:
+Testing covers:
 
-Test strategy
-Test cases
-Expected results
-Actual results
-Defects identified
-Defects fixed
-Limitations and future improvements
-Testing focused on deployment, form validation, variable passing, gateway decisions, Java worker execution, and monitoring through Camunda Operate.
+BPMN deployment
+Camunda Form validation
+Variable passing
+Gateway decision paths
+Java worker execution
+Completed process instances in Camunda Operate
+Defects and fixes found during deployment
+Authors
+DISP Team 3
