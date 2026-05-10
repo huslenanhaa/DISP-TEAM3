@@ -5,11 +5,11 @@ camunda:
   client:
     mode: saas
     auth:
-      client-id: ${ZEEBE_CLIENT_ID:YBDGCpPil9OlqCdncwax.DeUmNylqAi0}
-      client-secret: ${ZEEBE_CLIENT_SECRET:kZsDMPLQf5t9NdfOMzo9zqv~tdOg0CGTZA8773ii.ks9in2Thn7BFBvegsH-rErm}
+      client-id: YOUR_CLIENT_ID
+      client-secret: YOUR_CLIENT_SECRET
     cloud:
-      cluster-id: ${ZEEBE_CLUSTER_ID:848240b1-573c-4a07-bd52-723bea5b23b7}
-      region: ${ZEEBE_REGION:lhr-1}
+      cluster-id: YOUR_CLUSTER_ID
+      region: lhr-1
 
 probuild:
   deployment:
